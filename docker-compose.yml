@@ -1,0 +1,37 @@
+version: '3.6'
+
+services:
+
+  app:
+    build: .
+    image: edm
+    restart: unless-stopped
+    ports:
+      - "8090:8090"
+    depends_on:
+      - db
+      
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: edm
+      POSTGRES_DB: edm
+    restart: unless-stopped 
+    expose:
+      - 5432
+    volumes:
+      - ./sqlscripts/postgresql-create.sql:/docker-entrypoint-initdb.d/postgresql-create.sql
+      - ./testfiles/xadmin.sql:/docker-entrypoint-initdb.d/xadmin.sql
+     
+  pgadmin:      
+    image: dpage/pgadmin4
+    environment:  
+      PGADMIN_DEFAULT_EMAIL: 'user@domain.com'
+      PGADMIN_DEFAULT_PASSWORD: 'p4ssw0rd'
+    restart: unless-stopped      
+    ports:
+      - "5050:80"  
+    depends_on:
+      - db 
+      
