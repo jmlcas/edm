@@ -23,6 +23,7 @@ services:
     volumes:
       - ./sqlscripts/postgresql-create.sql:/docker-entrypoint-initdb.d/postgresql-create.sql
       - ./testfiles/xadmin.sql:/docker-entrypoint-initdb.d/xadmin.sql
+      - ./postgres-data:/var/lib/postgresql/data
       
   adminer:
     image: adminer
