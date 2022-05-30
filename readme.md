@@ -1,4 +1,4 @@
-# EDM System
+# EDMS - Electronic Document Management System
 
 Ver en "localhost:8090"
 
