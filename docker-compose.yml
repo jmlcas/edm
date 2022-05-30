@@ -7,7 +7,7 @@ services:
     image: edm
     restart: unless-stopped
     ports:
-      - "8090:8090"
+      - "8200:8090"
     depends_on:
       - db
       
